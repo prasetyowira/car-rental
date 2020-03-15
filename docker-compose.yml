@@ -1,0 +1,39 @@
+version: '3.6'
+
+volumes:
+  car_rental_db:
+  car_rental_db_test:
+
+
+networks:
+  default:
+    name: 'car_rental-network'
+
+services:
+  db:
+    image: postgres:11-alpine
+    container_name: car_rental_db
+    environment:
+      - POSTGRES_USER=car_rental
+      - POSTGRES_DB=car_rental
+      - POSTGRES_PASSWORD=${CR_DB_PASS:-password}
+    ports:
+      - ${CR_DB_PORT:-5432}:5432
+    volumes:
+      - car_rental_db:/var/lib/postgresql/data/
+  db_test:
+    image: postgres:11-alpine
+    container_name: car_rental_db_test
+    environment:
+      - POSTGRES_USER=car_rental
+      - POSTGRES_DB=car_rental
+      - POSTGRES_PASSWORD=${CR_DB_TEST_PASS:-password}
+    ports:
+      - ${CR_DB_TEST_PORT:-5433}:5432
+    volumes:
+      - car_rental_db_test:/var/lib/postgresql/data/
+  redis:
+    image: redis:5.0-alpine
+    container_name: car_rental_redis
+    ports:
+      - ${CR_REDIST_PORT}:6379

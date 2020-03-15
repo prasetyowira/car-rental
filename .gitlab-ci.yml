@@ -1,0 +1,67 @@
+image: python:3.6.8-alpine3.9
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  POSTGRES_USER: car_rental
+  POSTGRES_DB: car_rental
+  POSTGRES_PASSWORD: password
+  AKRDL_DB_HOST: car_rental_db_test
+  AKRDL_DB_PORT: 5432
+
+.only_change_python_file:
+  only:
+    changes:
+      - "**/*.py"
+      - .gitlab-ci.yml
+
+.install_requires:
+  cache:
+    paths:
+      - .cache/pip
+      - venv/
+  before_script:
+    - python -V
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+    - pip install --upgrade pip
+    - apk add gcc musl-dev postgresql-dev python3-dev libxml2-dev libxslt-dev
+    - pip install -r requirements.txt
+
+.extra_services:
+  services:
+    - name: postgres:11-alpine
+      alias: car_rental_db_test
+
+stages:
+  - lint
+  - test
+
+flake8:
+  extends:
+    - .only_change_python_file
+    - .install_requires
+  stage: lint
+  script:
+    - pip install flake8==3.7.9
+    - flake8 .
+
+black:
+  extends:
+    - .only_change_python_file
+    - .install_requires
+  stage: lint
+  script:
+    - pip install black==19.10b0
+    - black --check .
+
+coverage:
+  extends:
+    - .only_change_python_file
+    - .install_requires
+    - .extra_services
+  stage: test
+  script:
+    - pip install behave==1.2.6 coverage==5.0.3
+    - coverage run -m behave -t ~uat -k
+    - coverage report

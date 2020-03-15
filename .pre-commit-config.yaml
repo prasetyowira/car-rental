@@ -1,0 +1,77 @@
+repos:
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v2.5.0
+      hooks:
+        - id: trailing-whitespace
+          name: Trim trailing whitespace
+          description: This hook trims trailing whitespace.
+          entry: trailing-whitespace-fixer
+          language: python
+          types: [text]
+          stages: [commit, push, manual]
+        - id: end-of-file-fixer
+          name: Fix end of files
+          description: Ensures that a file is either empty, or ends with one newline.
+          entry: end-of-file-fixer
+          language: python
+          types: [text]
+          stages: [commit, push, manual]
+#        - id: flake8
+#          name: Flake8
+#          description: This hook runs flake8.
+#          entry: flake8
+#          language: python
+#          types: [python]
+#          require_serial: true
+        - id: detect-private-key
+          name: Detect private key
+          description: Detects the presence of private keys
+          entry: detect-private-key
+          language: python
+          types: [text]
+        - id: no-commit-to-branch
+          args: [--branch, master]
+          name: "Don't commit to branch"
+          entry: no-commit-to-branch
+          language: python
+          pass_filenames: false
+          always_run: true
+        - id: check-merge-conflict
+          name: Check for merge conflicts
+          description: Check for files that contain merge conflict strings.
+          entry: check-merge-conflict
+          language: python
+          types: [text]
+
+    - repo: https://gitlab.com/pycqa/flake8
+      rev: 3.7.9
+      hooks:
+        - id: flake8
+          name: Flake8
+          description: This hook runs flake8.
+          entry: flake8
+          language: python
+          types: [python]
+          require_serial: true
+
+    - repo: https://github.com/psf/black
+      rev: stable
+      hooks:
+        - id: black
+          name: black
+          description: 'Black: The uncompromising Python code formatter'
+          entry: black
+          language: python
+          language_version: python3
+          require_serial: true
+          types: [python]
+
+    - repo: https://github.com/pre-commit/mirrors-isort
+      rev: 'v4.3.21'  # Use the revision sha / tag you want to point at
+      hooks:
+        - id: isort
+          name: isort
+          description: 'Sorting imports'
+          entry: isort
+          language: python
+          language_version: python3

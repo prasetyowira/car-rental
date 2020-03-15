@@ -1,0 +1,60 @@
+[tool.poetry]
+name = "car_rental_app"
+version = "0.1.0"
+description = "Car Rental App for SweetEscape"
+authors = ["Prasetyo Pandu Perwira <prasetyowira@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+flask = "^1.1"
+flask-marshmallow = "^0.11"
+alembic = "^1.4"
+psycopg2-binary = "^2.8"
+marshmallow-sqlalchemy = "^0.21.0"
+celery = "^4.4.0"
+redis = "^3.3.11"
+mimesis = "^3.3.0"
+flask-migrate = "^2.5.2"
+flask-restful = "^0.3.8"
+flask-shell-ipython = "^0.4.1"
+
+[tool.poetry.dev-dependencies]
+black = "=19.10b0"
+isort = "^4.3"
+pytest = "^5.3"
+pytest-dotenv = "^0.4.0"
+pytest-flake8 = "^1.0"
+pytest-isort = "^0.3.1"
+pytest-cov = "^2.8"
+responses = "^0.10.7"
+Sphinx = "^2.3.1"
+sphinxcontrib-httpdomain = "^1.7.0"
+sphinx-rtd-theme = "^0.4.3"
+behave = "^1.2.6"
+flake8 = "^3.7.9"
+coverage = "^5.0.3"
+ipython = "^7.11.1"
+mypy = "^0.761"
+pre-commit = "^2.1.1"
+
+[tool.pytest]
+filterwarnings = "ignore::DeprecationWarning"
+flake8-max-line-length = 88
+addopts = "-v --isort --flake8 --cov=src --cov-fail-under=50 --cov-report term-missing --cov-report xml"
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+sections = "FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
+default_section = "FIRSTPARTY"]
+force_single_line = false
+use_parentheses = true
+line_length = 88
+known_first_party= "rental_app"
+
+[aliases]
+test = "pytest"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
