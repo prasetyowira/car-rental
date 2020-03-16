@@ -29,13 +29,13 @@ repos:
           entry: detect-private-key
           language: python
           types: [text]
-        - id: no-commit-to-branch
-          args: [--branch, master]
-          name: "Don't commit to branch"
-          entry: no-commit-to-branch
-          language: python
-          pass_filenames: false
-          always_run: true
+#        - id: no-commit-to-branch
+#          args: [--branch, master]
+#          name: "Don't commit to branch"
+#          entry: no-commit-to-branch
+#          language: python
+#          pass_filenames: false
+#          always_run: true
         - id: check-merge-conflict
           name: Check for merge conflicts
           description: Check for files that contain merge conflict strings.

@@ -3,7 +3,6 @@ from logging import getLogger
 
 import click
 from flask.cli import AppGroup
-
 from rental_app.controllers.cars import CarsController
 from rental_app.controllers.rents import RentsController
 
@@ -19,10 +18,9 @@ _log = getLogger(__name__)
 def create_car(registration_number: str, color: str):
     if registration_number == "" or color == "":
         raise NotImplementedError
-    result = CarsController.create(data=dict(
-        registration_number=registration_number,
-        color=color
-    ))
+    result = CarsController.create(
+        data=dict(registration_number=registration_number, color=color)
+    )
     print(result)
 
 
@@ -53,11 +51,14 @@ def reserve(registration_number: str, customer_name: str, date: str):
         raise NotImplementedError
 
     rent_date = datetime.strptime(date, "%Y-%m-%d")
-    result = RentsController.create(dict(
-        registration_number=registration_number,
-        customer_name=customer_name,
-        rent_date=rent_date
-    ))
+    # Create Reserve
+    result = RentsController.create(
+        dict(
+            registration_number=registration_number,
+            customer_name=customer_name,
+            rent_date=rent_date,
+        )
+    )
     print(result)
 
 
@@ -70,9 +71,11 @@ def rent(registration_number: str, customer_name: str, date: str):
         raise NotImplementedError
 
     rent_date = datetime.strptime(date, "%Y-%m-%d")
-    result = RentsController.create(dict(
-        registration_number=registration_number,
-        customer_name=customer_name,
-        rent_date=rent_date
-    ))
+    result = RentsController.create(
+        dict(
+            registration_number=registration_number,
+            customer_name=customer_name,
+            rent_date=rent_date,
+        )
+    )
     print(result)
