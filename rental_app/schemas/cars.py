@@ -2,7 +2,7 @@ from marshmallow import Schema, ValidationError, fields, validates
 from rental_app.models.cars import Car
 
 
-class CarSchema(Schema):
+class CarSchema(Schema):  # pragma: no cover
     registration_number = fields.String(required=True)
     color = fields.String(required=True)
     today_status = fields.String()
