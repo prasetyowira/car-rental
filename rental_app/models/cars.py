@@ -1,9 +1,10 @@
 from datetime import datetime
-from sqlalchemy.orm import relationship
-from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method
+
 from rental_app import db
 from rental_app.enums import CarStatusStatus
 from rental_app.models.commons import BaseModel
+from sqlalchemy.ext.hybrid import hybrid_method, hybrid_property
+from sqlalchemy.orm import relationship
 
 
 class Car(BaseModel):
@@ -41,4 +42,3 @@ class Car(BaseModel):
             if hasattr(filtered_rent, "customer_name"):
                 return filtered_rent.customer_name
         return ""
-

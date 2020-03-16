@@ -15,4 +15,3 @@ def client(app):
 @pytest.fixture(scope="module")
 def cli(app):
     return app.test_cli_runner()
-

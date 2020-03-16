@@ -1,4 +1,3 @@
-
 def test_camel_case():
     from rental_app.tools.commons import camelcase
 
@@ -18,5 +17,3 @@ def test_enum_comprehensions():
     results = enum_comprehensions(CarStatusStatus)
     expected = ["Free", "Rented", "In Repair"]
     assert results == expected
-
-

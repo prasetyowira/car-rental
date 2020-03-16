@@ -3,6 +3,7 @@ class RentsController:
     def create(data: dict) -> str:
         from rental_app.models.cars import Car as CarModel
         from rental_app.models.logs import Log
+
         car = CarModel.query.filter(
             CarModel.registration_number == data.get("registration_number"),
         ).first()
@@ -13,7 +14,7 @@ class RentsController:
         rented_list = Log.query.filter(
             Log.car_id == car.id,
             Log.has_settled.is_(False),
-            Log.rent_date == data.get("rent_date")
+            Log.rent_date == data.get("rent_date"),
         ).first()
 
         if rented_list:
@@ -27,7 +28,7 @@ class RentsController:
 
         try:
             log = Log(**payload_data).save()
-        except Exception as e:
+        except Exception:
             return "Internal Server error"
         return f"Reserved {car.registration_number} to {log.customer_name} on {log.rent_date}"
 

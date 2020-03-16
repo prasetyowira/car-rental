@@ -44,7 +44,9 @@ def discover_blueprints(path: str) -> list:  # pragma: no cover
     return blueprints
 
 
-def make_json_response(http_status: Union[HTTPStatus, int], data: dict) -> Response:  # pragma: no cover
+def make_json_response(
+    http_status: Union[HTTPStatus, int], data: dict
+) -> Response:  # pragma: no cover
     """
     This method used to make flask Response object from given http status and response data
 
@@ -84,4 +86,3 @@ def camelcase(s: str) -> str:
 
 def enum_comprehensions(enum):
     return [str(key.value) for key in enum]
-
