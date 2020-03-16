@@ -5,6 +5,8 @@ import click
 from flask import current_app
 from flask.cli import AppGroup
 
+from rental_app.controllers.cars import CarsController
+
 car_cli = AppGroup("car", help="all cli related to car")
 rent_cli = AppGroup("rent", help="all cli related to rent")
 
@@ -17,8 +19,12 @@ _log = getLogger(__name__)
 def create_car(registration_number: str, color: str):
     if registration_number == "" or color == "":
         raise NotImplementedError
-    print(registration_number)
-    print(color)
+    result = CarsController.create(data=dict(
+        registration_number=registration_number,
+        color=color
+    ))
+    print(result)
+
 
 
 @car_cli.command("search")
