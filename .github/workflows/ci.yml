@@ -25,9 +25,9 @@ jobs:
 
       - name: Init db
         run: |
-          if [ -f docker-compose.test.yml ]; then
-            docker-compose --file docker-compose.test.yml build
-            docker-compose --file docker-compose.test.yml up -d
+          if [ -f docker-compose.yml ]; then
+            docker-compose --file docker-compose.yml build
+            docker-compose --file docker-compose.yml up -d
           fi
 
       - name: Set up Python 3.6.10
@@ -42,29 +42,25 @@ jobs:
           source venv/bin/activate
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip freeze
-          env
+
+      - name: Lint
+        run: |
+          pip install flake8
+          pip install black==19.10b0
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+          black --check .
+
+      - name: Coverage
+        run: |
+          source venv/bin/activate
+          pip install behave==1.2.6 coverage==5.0.3 pytest
           docker ps
-#
-#      - name: Lint
-#        run: |
-#          pip install flake8
-#          pip install black==19.10b0
-#          pip freeze
-#          # stop the build if there are Python syntax errors or undefined names
-#          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-#          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-#          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-#          black --check .
-#
-#      - name: Coverage
-#        run: |
-#          source venv/bin/activate
-#          pip install behave==1.2.6 coverage==5.0.3 pytest
-#          pip freeze
-#          coverage run -m behave -k
-#          coverage run --append -m pytest
-#          coverage report
+          coverage run -m behave -k
+          coverage run --append -m pytest
+          coverage report
 #  build:
 #    needs: test
 #    runs-on: ubuntu-latest
