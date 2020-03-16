@@ -57,6 +57,7 @@ jobs:
 
       - name: Coverage
         run: |
+          source venv/bin/activate
           pip install behave==1.2.6 coverage==5.0.3 pytest
           pip freeze
           coverage run -m behave -k
