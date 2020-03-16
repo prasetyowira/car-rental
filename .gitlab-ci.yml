@@ -63,5 +63,6 @@ coverage:
   stage: test
   script:
     - pip install behave==1.2.6 coverage==5.0.3
-    - coverage run -m behave -t ~uat -k
+    - coverage run -m behave -k
+    - coverage run --append -m pytest
     - coverage report

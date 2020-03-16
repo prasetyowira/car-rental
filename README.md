@@ -55,7 +55,7 @@
 ### Running Test
 
 ```shell
-pytest
+make test
 ```
 
 ### Coding Style
