@@ -5,8 +5,8 @@ variables:
   POSTGRES_USER: car_rental
   POSTGRES_DB: car_rental
   POSTGRES_PASSWORD: password
-  AKRDL_DB_HOST: car_rental_db_test
-  AKRDL_DB_PORT: 5432
+  CR_DB_HOST: car_rental_db_test
+  CR_DB_PORT: 5432
 
 .only_change_python_file:
   only:
