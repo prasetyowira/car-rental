@@ -7,7 +7,7 @@ from rental_app.models.commons import BaseModel
 class Log(BaseModel):
     __tablename__ = "rental_app_logs"
 
-    car_id = db.Column(db.Integer, nullable=False)
+    car_id = db.Column(db.Integer, sa.ForeignKey('rental_app_cars.id'), nullable=False)
     customer_name = db.Column(db.String(255), nullable=False)
     rent_date = db.Column(db.Date)
     inquiry_at = db.Column(

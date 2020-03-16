@@ -11,9 +11,7 @@ from rental_app.enums import CarStatusStatus
 class CarSchema(Schema):
     registration_number = fields.String(required=True)
     color = fields.String(required=True)
-    status = fields.String(
-        validate=OneOf(enum_comprehensions(CarStatusStatus))
-    )
+    today_status = fields.String()
 
     @validates("registration_number")
     def validate_registration_number(self, value):

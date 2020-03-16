@@ -1,8 +1,8 @@
-"""init db
+"""init
 
-Revision ID: 4d47952600b7
+Revision ID: f23ae3107298
 Revises: 
-Create Date: 2020-03-15 23:00:57.609262
+Create Date: 2020-03-16 12:44:47.305388
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4d47952600b7'
+revision = 'f23ae3107298'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,7 +26,6 @@ def upgrade():
     sa.Column('deleted_at', sa.DateTime(), nullable=True),
     sa.Column('registration_number', sa.String(length=255), nullable=True),
     sa.Column('color', sa.String(length=255), nullable=True),
-    sa.Column('status', sa.Enum('FREE', 'RENTED', 'IN_REPAIR', name='car_status'), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('registration_number')
     )
@@ -38,10 +37,10 @@ def upgrade():
     sa.Column('deleted_at', sa.DateTime(), nullable=True),
     sa.Column('car_id', sa.Integer(), nullable=False),
     sa.Column('customer_name', sa.String(length=255), nullable=False),
-    sa.Column('rent_start', sa.Date(), nullable=True),
-    sa.Column('rent_end', sa.Date(), nullable=True),
+    sa.Column('rent_date', sa.Date(), nullable=True),
     sa.Column('inquiry_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
     sa.Column('has_settled', sa.Boolean(), server_default='false', nullable=True),
+    sa.ForeignKeyConstraint(['car_id'], ['rental_app_cars.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

@@ -27,7 +27,6 @@ def create_car(registration_number: str, color: str):
     print(result)
 
 
-
 @car_cli.command("search")
 @click.argument("registration_number")
 def search_car(registration_number: str):
@@ -43,6 +42,7 @@ def daily_status(date: tuple):
     else:
         date = date[0]
     print(date)
+    RentsController.get(date=date)
 
 
 @rent_cli.command("reserve", context_settings={"ignore_unknown_options": True})
@@ -53,13 +53,12 @@ def reserve(registration_number: str, customer_name: str, date: str):
     if registration_number == "" or customer_name == "":
         raise NotImplementedError
 
-    if len(date) == 0:
-        rent_date = datetime.strptime(date, "%Y-%m-%d")
-        RentsController.create(dict(
-            registration_number=registration_number,
-            customer_name=customer_name,
-            rent_date=rent_date
-        ))
+    rent_date = datetime.strptime(date, "%Y-%m-%d")
+    RentsController.create(dict(
+        registration_number=registration_number,
+        customer_name=customer_name,
+        rent_date=rent_date
+    ))
 
 
 @rent_cli.command("rent", context_settings={"ignore_unknown_options": True})

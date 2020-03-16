@@ -20,7 +20,7 @@ class CarsController:
         return f"Car {car.registration_number} {car.color} saved"
 
     @staticmethod
-    def get(*args, **kwargs) -> str:
+    def get(*args, **kwargs):
         from rental_app.models.cars import Car
         keyword = kwargs.get("keyword")
         cars = Car.query.filter(
@@ -30,6 +30,6 @@ class CarsController:
             )
         ).all()
 
-        print("|    Registration No     |   Color   |\n")
+        print("    Registration No  Color   \n")
         for car in cars:
-            print(f"|    {car.registration_number}     |   {car.color}   |\n")
+            print(f"    {car.registration_number}   {car.color}   \n")
