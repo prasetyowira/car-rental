@@ -1,3 +1,4 @@
+from sqlalchemy import or_
 from marshmallow import ValidationError
 
 
@@ -17,3 +18,18 @@ class CarsController:
         except Exception as e:
             return "Internal Server error"
         return f"Car {car.registration_number} {car.color} saved"
+
+    @staticmethod
+    def get(*args, **kwargs) -> str:
+        from rental_app.models.cars import Car
+        keyword = kwargs.get("keyword")
+        cars = Car.query.filter(
+            or_(
+                Car.registration_number == keyword,
+                Car.color.ilike(f"%{keyword}%")
+            )
+        ).all()
+
+        print("|    Registration No     |   Color   |\n")
+        for car in cars:
+            print(f"|    {car.registration_number}     |   {car.color}   |\n")

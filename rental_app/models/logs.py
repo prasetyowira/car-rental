@@ -9,8 +9,7 @@ class Log(BaseModel):
 
     car_id = db.Column(db.Integer, nullable=False)
     customer_name = db.Column(db.String(255), nullable=False)
-    rent_start = db.Column(db.Date)
-    rent_end = db.Column(db.Date)
+    rent_date = db.Column(db.Date)
     inquiry_at = db.Column(
         sa.DateTime(),
         default=sa.func.now(),

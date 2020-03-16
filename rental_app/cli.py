@@ -6,6 +6,7 @@ from flask import current_app
 from flask.cli import AppGroup
 
 from rental_app.controllers.cars import CarsController
+from rental_app.controllers.rents import RentsController
 
 car_cli = AppGroup("car", help="all cli related to car")
 rent_cli = AppGroup("rent", help="all cli related to rent")
@@ -31,6 +32,7 @@ def create_car(registration_number: str, color: str):
 @click.argument("registration_number")
 def search_car(registration_number: str):
     print(registration_number)
+    CarsController.get(keyword=registration_number)
 
 
 @rent_cli.command("status", context_settings={"ignore_unknown_options": True})
@@ -45,39 +47,33 @@ def daily_status(date: tuple):
 
 @rent_cli.command("reserve", context_settings={"ignore_unknown_options": True})
 @click.argument("registration_number", nargs=1)
-@click.argument("name", nargs=1)
-@click.argument("date", nargs=-1)
-def reserve(registration_number: str, name: str, date: tuple):
-    if registration_number == "" or name == "":
+@click.argument("customer_name", nargs=1)
+@click.argument("date", nargs=1)
+def reserve(registration_number: str, customer_name: str, date: str):
+    if registration_number == "" or customer_name == "":
         raise NotImplementedError
 
     if len(date) == 0:
-        start_date = datetime.now().strftime("%Y-%m-%d")
-        end_date = datetime.now().strftime("%Y-%m-%d")
-    elif len(date) == 1:
-        start_date = date[0]
-        end_date = start_date
-    else:
-        start_date = date[0]
-        end_date = date[1]
-    print(date)
+        rent_date = datetime.strptime(date, "%Y-%m-%d")
+        RentsController.create(dict(
+            registration_number=registration_number,
+            customer_name=customer_name,
+            rent_date=rent_date
+        ))
 
 
 @rent_cli.command("rent", context_settings={"ignore_unknown_options": True})
 @click.argument("registration_number", nargs=1)
-@click.argument("name", nargs=1)
-@click.argument("date", nargs=-1)
-def rent(registration_number: str, name: str, date: tuple):
-    if registration_number == "" or name == "":
+@click.argument("customer_name", nargs=1)
+@click.argument("date", nargs=1)
+def rent(registration_number: str, customer_name: str, date: str):
+    if registration_number == "" or customer_name == "":
         raise NotImplementedError
 
     if len(date) == 0:
-        start_date = datetime.now().strftime("%Y-%m-%d")
-        end_date = datetime.now().strftime("%Y-%m-%d")
-    elif len(date) == 1:
-        start_date = date[0]
-        end_date = start_date
-    else:
-        start_date = date[0]
-        end_date = date[1]
-    print(date)
+        rent_date = datetime.strptime(date, "%Y-%m-%d")
+        RentsController.create(dict(
+            registration_number=registration_number,
+            customer_name=customer_name,
+            rent_date=rent_date
+        ))
