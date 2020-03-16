@@ -7,7 +7,6 @@ class RentsController:
     def create(data: dict):
         from rental_app.models.cars import Car as CarModel
         from rental_app.models.logs import Log
-        # from rental_app.enums import CarStatusStatus
 
         car = CarModel.query.filter(
             CarModel.registration_number == data.get("registration_number"),

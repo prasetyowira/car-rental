@@ -40,5 +40,5 @@ class Car(BaseModel):
             filtered_rent = filtered_rent.pop()
             if hasattr(filtered_rent, "customer_name"):
                 return filtered_rent.customer_name
-        return None
+        return ""
 
