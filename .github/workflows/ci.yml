@@ -35,9 +35,9 @@ jobs:
           python-version: 3.6.9
 
       - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Lint
         run: |
@@ -50,11 +50,11 @@ jobs:
           black --check .
 
       - name: Coverage
-          run: |
-            pip install behave==1.2.6 coverage==5.0.3 pytest
-            coverage run -m behave -k
-            coverage run --append -m pytest
-            coverage report
+        run: |
+          pip install behave==1.2.6 coverage==5.0.3 pytest
+          coverage run -m behave -k
+          coverage run --append -m pytest
+          coverage report
 #  build:
 #    needs: test
 #    runs-on: ubuntu-latest
