@@ -20,7 +20,7 @@ class CarsController:
         return f"Car {car.registration_number} {car.color} saved"
 
     @staticmethod
-    def get(*args, **kwargs):
+    def get(*args, **kwargs) -> str:
         from rental_app.models.cars import Car
         keyword = kwargs.get("keyword")
         cars = Car.query.filter(
@@ -29,7 +29,9 @@ class CarsController:
                 Car.color.ilike(f"%{keyword}%")
             )
         ).all()
-
-        print("    Registration No  Color   \n")
+        title = f"{'Registration No':<30}{'Color':>10}\n"
+        content = ""
         for car in cars:
-            print(f"    {car.registration_number}   {car.color}   \n")
+            content += f"{car.registration_number:<30}{car.color:>10}\n"
+
+        return title + content

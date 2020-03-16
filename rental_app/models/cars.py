@@ -14,7 +14,7 @@ class Car(BaseModel):
     rents = relationship("Log")
 
     @hybrid_property
-    def today_status(self):
+    def today_status(self):  # pragma: no cover
         rents = self.rents
         today = datetime.now().today()
         filtered_rent = list(filter(lambda x: x.rent_date == today, rents))

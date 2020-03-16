@@ -17,7 +17,7 @@ database:
 	flask db upgrade
 
 coverage:
-	coverage run -m behave -t ~uat -k
+	coverage run -m behave -k
 	coverage run --append -m pytest
 	coverage report
 

@@ -2,7 +2,6 @@ from datetime import datetime
 from logging import getLogger
 
 import click
-from flask import current_app
 from flask.cli import AppGroup
 
 from rental_app.controllers.cars import CarsController
@@ -30,8 +29,8 @@ def create_car(registration_number: str, color: str):
 @car_cli.command("search")
 @click.argument("registration_number")
 def search_car(registration_number: str):
-    print(registration_number)
-    CarsController.get(keyword=registration_number)
+    result = CarsController.get(keyword=registration_number)
+    print(result)
 
 
 @rent_cli.command("status", context_settings={"ignore_unknown_options": True})
@@ -41,8 +40,8 @@ def daily_status(date: tuple):
         date = datetime.now().strftime("%Y-%m-%d")
     else:
         date = date[0]
-    print(date)
-    RentsController.get(date=date)
+    result = RentsController.get(date=date)
+    print(result)
 
 
 @rent_cli.command("reserve", context_settings={"ignore_unknown_options": True})
@@ -54,11 +53,12 @@ def reserve(registration_number: str, customer_name: str, date: str):
         raise NotImplementedError
 
     rent_date = datetime.strptime(date, "%Y-%m-%d")
-    RentsController.create(dict(
+    result = RentsController.create(dict(
         registration_number=registration_number,
         customer_name=customer_name,
         rent_date=rent_date
     ))
+    print(result)
 
 
 @rent_cli.command("rent", context_settings={"ignore_unknown_options": True})
@@ -69,10 +69,10 @@ def rent(registration_number: str, customer_name: str, date: str):
     if registration_number == "" or customer_name == "":
         raise NotImplementedError
 
-    if len(date) == 0:
-        rent_date = datetime.strptime(date, "%Y-%m-%d")
-        RentsController.create(dict(
-            registration_number=registration_number,
-            customer_name=customer_name,
-            rent_date=rent_date
-        ))
+    rent_date = datetime.strptime(date, "%Y-%m-%d")
+    result = RentsController.create(dict(
+        registration_number=registration_number,
+        customer_name=customer_name,
+        rent_date=rent_date
+    ))
+    print(result)

@@ -17,7 +17,7 @@ from flask import Response, current_app
 error_logger = getLogger("error")
 
 
-def discover_blueprints(path: str) -> list:
+def discover_blueprints(path: str) -> list:  # pragma: no cover
     """
     This method used to load blueprints from given path
 
@@ -44,7 +44,7 @@ def discover_blueprints(path: str) -> list:
     return blueprints
 
 
-def make_json_response(http_status: Union[HTTPStatus, int], data: dict) -> Response:
+def make_json_response(http_status: Union[HTTPStatus, int], data: dict) -> Response:  # pragma: no cover
     """
     This method used to make flask Response object from given http status and response data
 
@@ -60,7 +60,7 @@ def make_json_response(http_status: Union[HTTPStatus, int], data: dict) -> Respo
     )
 
 
-def descripted_exception_logger(e: Exception) -> None:
+def descripted_exception_logger(e: Exception) -> None:  # pragma: no cover
     """
     This method used to log an exception with description
 

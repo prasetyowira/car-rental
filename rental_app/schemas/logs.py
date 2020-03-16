@@ -1,9 +1,7 @@
-from datetime import datetime
-
-from marshmallow import Schema, ValidationError, fields, validates
+from marshmallow import Schema, fields
 
 
-class LogSchema(Schema):
+class LogSchema(Schema):  # pragma: no cover
     car_id = fields.Integer(required=True)
     customer_name = fields.String(required=True)
     rent_date = fields.Date(required=True)

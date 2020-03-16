@@ -1,19 +1,14 @@
-from sqlalchemy import or_
-from marshmallow import ValidationError
-
-
 class RentsController:
     @staticmethod
-    def create(data: dict):
+    def create(data: dict) -> str:
         from rental_app.models.cars import Car as CarModel
         from rental_app.models.logs import Log
-
         car = CarModel.query.filter(
             CarModel.registration_number == data.get("registration_number"),
         ).first()
+
         if car is None:
-            print("Car Not Found")
-            return
+            return "Car Not Found"
 
         rented_list = Log.query.filter(
             Log.car_id == car.id,
@@ -22,8 +17,7 @@ class RentsController:
         ).first()
 
         if rented_list:
-            print("Car Already Rented")
-            return
+            return "Car Already Rented"
 
         payload_data = dict(
             car_id=car.id,
@@ -38,7 +32,7 @@ class RentsController:
         return f"Reserved {car.registration_number} to {log.customer_name} on {log.rent_date}"
 
     @staticmethod
-    def get(*args, **kwargs):
+    def get(*args, **kwargs) -> str:
         from rental_app.models.cars import Car as CarModel
         from rental_app.models.logs import Log
 
@@ -46,8 +40,11 @@ class RentsController:
 
         cars = CarModel.query.outerjoin(Log).all()
 
-        print("Registration No  Color   Status  Customer\n")
+        title = f"{'Registration No':<30}{'Color':<10}{'Status':<10}{'Customer':>10}\n"
+        content = ""
         for car in cars:
             status = car.status(date)
             customer = car.get_customer(date)
-            print(f"{car.registration_number}   {car.color}     {status.value}      {customer}\n")
+            content += f"{car.registration_number:<30}{car.color:<10}{status.value:<10}{customer:>10}\n"
+
+        return title + content

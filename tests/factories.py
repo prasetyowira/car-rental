@@ -28,21 +28,24 @@ def generate_car_color():
     return text.color()
 
 
+def generate_rent_data(car_id=None):
+    data = dict(
+        customer_name=generate_customer(),
+        date=generate_rent_date(),
+    )
+
+    if car_id is not None:
+        data.update(car_id=car_id)
+
+    return data
+
+
 def generate_customer():
     return person.name()
 
 
-def generate_start_rent():
-    return datetime.formatted_date(fm=date_format, min=2020, end=2020)
-
-
-def generate_end_rent(start_date: str):
-    start = py_datetime.strptime(start_date, date_format)
-    end = start - timedelta(days=365)
-    while start > end:
-        end_date = datetime.formatted_date(fm=date_format, end=2021)
-        end = py_datetime.strptime(end_date, date_format)
-    return end_date
+def generate_rent_date():
+    return datetime.formatted_date(fmt=date_format, start=2020, end=2020)
 
 
 def generate_redis_sample_data():

@@ -4,6 +4,7 @@ from tests.behave.features.fixtures import (
     flask_app,
     flask_client,
     flask_db,
+    cli_runner
 )
 
 
@@ -11,6 +12,7 @@ def before_all(context):
     use_fixture(flask_app, context)
     use_fixture(flask_db, context)
     use_fixture(flask_client, context)
+    use_fixture(cli_runner, context)
     context.db.create_all()
     clean_db(context.db)
 

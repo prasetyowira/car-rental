@@ -3,6 +3,8 @@ This file handle index's blueprints
 """
 from rental_app.tools.commons import make_json_response
 from flask import Blueprint, Response
+from rental_app.models import *
+
 
 index_blueprint = Blueprint("index", __name__, url_prefix="/")
 

@@ -16,6 +16,12 @@ def flask_db(context):
 
 
 @fixture
+def cli_runner(context):
+    context.cli_runner = context.app.test_cli_runner()
+    yield context.cli_runner
+
+
+@fixture
 def flask_client(context):
     context.client = context.app.test_client()
     yield context.client

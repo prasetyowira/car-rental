@@ -19,3 +19,4 @@ def test_enum_comprehensions():
     expected = ["Free", "Rented", "In Repair"]
     assert results == expected
 
+
