@@ -1,5 +1,7 @@
-from datetime import datetime as py_datetime, timedelta
-from mimesis import Address, Business, Datetime, Internet, Numbers, Person, random, Text
+from datetime import datetime as py_datetime
+from datetime import timedelta
+
+from mimesis import Address, Business, Datetime, Internet, Numbers, Person, Text, random
 
 person = Person()
 addr = Address()
@@ -15,13 +17,12 @@ date_format = "%Y-%m-%d"
 
 def generate_car_data():
     return dict(
-        registration_number=generate_car_registration_code(),
-        color=generate_car_color()
+        registration_number=generate_car_registration_code(), color=generate_car_color()
     )
 
 
 def generate_car_registration_code():
-    return random.custom_code(mask='@@-####')
+    return random.custom_code(mask="@@-####")
 
 
 def generate_car_color():
@@ -29,10 +30,7 @@ def generate_car_color():
 
 
 def generate_rent_data(car_id=None):
-    data = dict(
-        customer_name=generate_customer(),
-        date=generate_rent_date(),
-    )
+    data = dict(customer_name=generate_customer(), date=generate_rent_date(),)
 
     if car_id is not None:
         data.update(car_id=car_id)

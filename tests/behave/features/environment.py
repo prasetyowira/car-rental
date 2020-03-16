@@ -1,11 +1,6 @@
-from rental_app import db
 from behave import use_fixture
-from tests.behave.features.fixtures import (
-    flask_app,
-    flask_client,
-    flask_db,
-    cli_runner
-)
+from rental_app import db
+from tests.behave.features.fixtures import cli_runner, flask_app, flask_client, flask_db
 
 
 def before_all(context):

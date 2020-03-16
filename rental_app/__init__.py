@@ -15,7 +15,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from redis import Redis
 
-from .cli import (car_cli, rent_cli, )
+from .cli import car_cli, rent_cli
 from .tools.commons import (
     descripted_exception_logger,
     discover_blueprints,
