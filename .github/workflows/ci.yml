@@ -28,6 +28,7 @@ jobs:
           if [ -f docker-compose.test.yml ]; then
             docker-compose --file docker-compose.test.yml build
             docker-compose --file docker-compose.test.yml up -d
+          fi
 
       - name: Set up Python 3.6.9
         uses: actions/setup-python@v1
