@@ -49,6 +49,14 @@
     docker-compose up -d 
     ```
     
+4. Migrate DB
+    
+    db upgrade
+    
+    ```shell script
+    flask db upgrade
+    ```
+    
 
 ## Tests
 
@@ -80,9 +88,29 @@ flask shell
 flask car
 ```
 
+```
+Usage: 
+   
+   $ flask car create [registration number] [color]
+   $ flask car search [registration number | color]
+
+```
+
 ### Running Rent CLI
 
 ```shell
 flask rent
 ```
+
+```
+Usage: 
+   
+   $ flask rent reserve [registration number] [name] [date YYYY-MM-DD]
+   $ flask rent rent [registration number] [name] [date YYYY-MM-DD]
+   $ flask rent status [date YYYY-MM-DD]
+
+```
+
+
+
 
