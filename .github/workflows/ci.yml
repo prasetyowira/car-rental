@@ -62,6 +62,14 @@ jobs:
           coverage run -m behave -k
           coverage run --append -m pytest
           coverage report
+          coverage xml
+
+      - uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage.xml # optional
+          flags: unittests # optional
+          name: codecov # optional
+          fail_ci_if_error: true # optional (default = false)
 #  build:
 #    needs: test
 #    runs-on: ubuntu-latest

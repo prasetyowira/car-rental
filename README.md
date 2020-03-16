@@ -1,4 +1,6 @@
 # Car Rental
+![CI](https://github.com/prasetyowira/car-rental/workflows/CI/badge.svg)
+[![codecov](https://codecov.io/gh/prasetyowira/car-rental/branch/master/graph/badge.svg)](https://codecov.io/gh/prasetyowira/car-rental)
 
 ## Prerequisites
 
@@ -18,7 +20,7 @@
 
 ## Installing
 
-   
+
 1. Using [poetry](https://poetry.eustace.io/docs/#installation)
 
     ```shell script
@@ -27,36 +29,36 @@
     ```
 
     If you use VS Code, add this setting to your folder setting
-    
+
     ```shell script
     poetry env info -p
     ```
-    
+
 2. .env
-    
+
     Copy car_rental.env.example
-    
+
     ```shell script
     cp env.example .env
-    source car_rental.env.example 
+    source car_rental.env.example
     ```
-    
+
 3. Docker DB & Redis
-    
+
     Build docker db and redis
-    
+
     ```shell script
-    docker-compose up -d 
+    docker-compose up -d
     ```
-    
+
 4. Migrate DB
-    
+
     db upgrade
-    
+
     ```shell script
     flask db upgrade
     ```
-    
+
 
 ## Tests
 
@@ -89,8 +91,8 @@ flask car
 ```
 
 ```
-Usage: 
-   
+Usage:
+
    $ flask car create [registration number] [color]
    $ flask car search [registration number | color]
 
@@ -103,14 +105,10 @@ flask rent
 ```
 
 ```
-Usage: 
-   
+Usage:
+
    $ flask rent reserve [registration number] [name] [date YYYY-MM-DD]
    $ flask rent rent [registration number] [name] [date YYYY-MM-DD]
    $ flask rent status [date YYYY-MM-DD]
 
 ```
-
-
-
-
