@@ -25,6 +25,7 @@ jobs:
 
       - name: Init db
         run: |
+          source ./car_rental.env.example
           if [ -f docker-compose.yml ]; then
             docker-compose --file docker-compose.yml build
             docker-compose --file docker-compose.yml up -d
