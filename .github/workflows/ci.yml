@@ -47,6 +47,7 @@ jobs:
         run: |
           pip install flake8
           pip install black==19.10b0
+          pip freeze
           # stop the build if there are Python syntax errors or undefined names
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
@@ -56,6 +57,7 @@ jobs:
       - name: Coverage
         run: |
           pip install behave==1.2.6 coverage==5.0.3 pytest
+          pip freeze
           coverage run -m behave -k
           coverage run --append -m pytest
           coverage report
